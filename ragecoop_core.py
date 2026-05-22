@@ -18,6 +18,7 @@ from typing import Any, Iterable
 
 DEFAULT_PORT = 4499
 DEFAULT_PLAYER_ADDRESS = ""
+LEGACY_DEFAULT_PLAYER_ADDRESSES = {"10.8.1.14:4499"}
 DEFAULT_VPN_ADAPTER_KEYWORDS = [
     "wireguard",
     "amnezia",
@@ -149,6 +150,8 @@ class LauncherConfig:
         for key, value in data.items():
             if hasattr(config, key):
                 setattr(config, key, value)
+        if config.default_player_address in LEGACY_DEFAULT_PLAYER_ADDRESSES:
+            config.default_player_address = ""
         return config
 
     def as_json_dict(self) -> dict[str, Any]:

@@ -605,6 +605,30 @@ class RageCoopLauncherApp(ctk.CTk):
         )
         self.player_paste_button.grid(row=0, column=1, sticky="e")
 
+        player_vpn_row = ctk.CTkFrame(top_panel, fg_color="transparent")
+        player_vpn_row.grid(row=6, column=0, sticky="ew", padx=18, pady=(0, 12))
+        player_vpn_row.grid_columnconfigure((0, 1), weight=1)
+
+        self.player_vpn_button = ctk.CTkButton(
+            player_vpn_row,
+            text="Открыть VPN / tunnel",
+            height=42,
+            fg_color=COLORS["surface_3"],
+            hover_color=COLORS["stroke"],
+            command=self.open_player_vpn_client,
+        )
+        self.player_vpn_button.grid(row=0, column=0, sticky="ew", padx=(0, 8))
+
+        self.player_copy_network_button = ctk.CTkButton(
+            player_vpn_row,
+            text="Скопировать шаги сети",
+            height=42,
+            fg_color=COLORS["surface_3"],
+            hover_color=COLORS["stroke"],
+            command=self.copy_network_steps,
+        )
+        self.player_copy_network_button.grid(row=0, column=1, sticky="ew", padx=(8, 0))
+
         self.launch_game_button = ctk.CTkButton(
             top_panel,
             text="Добавить кооператив и запустить GTA 5",
@@ -615,7 +639,7 @@ class RageCoopLauncherApp(ctk.CTk):
             font=ctk.CTkFont(size=15, weight="bold"),
             command=self.start_player_flow,
         )
-        self.launch_game_button.grid(row=6, column=0, sticky="ew", padx=18, pady=(0, 12))
+        self.launch_game_button.grid(row=7, column=0, sticky="ew", padx=18, pady=(0, 12))
 
         ctk.CTkLabel(
             top_panel,
@@ -624,10 +648,10 @@ class RageCoopLauncherApp(ctk.CTk):
             wraplength=860,
             justify="left",
             font=ctk.CTkFont(size=13, weight="bold"),
-        ).grid(row=7, column=0, sticky="ew", padx=18, pady=(0, 14))
+        ).grid(row=8, column=0, sticky="ew", padx=18, pady=(0, 14))
 
         status_row = ctk.CTkFrame(top_panel, fg_color="transparent")
-        status_row.grid(row=8, column=0, sticky="ew", padx=18, pady=(0, 16))
+        status_row.grid(row=9, column=0, sticky="ew", padx=18, pady=(0, 16))
         status_row.grid_columnconfigure(1, weight=1)
 
         self.player_dot = ctk.CTkLabel(
@@ -745,11 +769,11 @@ class RageCoopLauncherApp(ctk.CTk):
     def _player_instruction_text(self) -> str:
         if self.uses_local_vpn_backend():
             return (
-                "Перед запуском GTA убедись, что ты в той же VPN-сети, что и хост. Затем запусти GTA, дождись "
-                "одиночной игры, нажми F9 и в меню RAGECOOP выбери Connect/Подключиться."
+                "Хост и игрок должны быть в одной VPN-сети. Открой тот же VPN/tunnel, вставь адрес хоста, "
+                "запусти GTA, дождись одиночной игры и открой меню RageCoop+ через F12."
             )
         return (
-            "После запуска GTA: дождись загрузки в одиночную игру, нажми F9, "
+            "После запуска GTA: дождись загрузки в одиночную игру, нажми F12, "
             "в меню RAGECOOP выбери Connect/Подключиться. Адрес уже будет подставлен как последний сервер."
         )
 
@@ -1011,6 +1035,31 @@ class RageCoopLauncherApp(ctk.CTk):
         self.set_host_status("VPN открыт")
         self.log(f"VPN-клиент запущен: {exe}", "host")
 
+    def open_player_vpn_client(self) -> None:
+        try:
+            exe = launch_vpn_client(self.app_root, self.config, source_roots=[self.app_root])
+        except LauncherError as exc:
+            messagebox.showerror("VPN / tunnel", str(exc))
+            self.log(f"VPN/tunnel не запущен: {exc}", "player")
+            return
+
+        self.set_player_status("VPN / tunnel открыт")
+        self.log(f"VPN/tunnel запущен: {exe}", "player")
+
+    def copy_network_steps(self) -> None:
+        text = (
+            "Сеть для GTA5 RAGECOOP:\n"
+            "1. Хост и игрок выбирают один способ связи: общая VPN-сеть или публичный UDP-туннель хоста.\n"
+            "2. Если выбран VPN, оба входят в одну сеть WireGuard/Amnezia/ZeroTier/Tailscale/OpenVPN.\n"
+            "3. Хост запускает сервер в GTA5CoopLauncher и копирует адрес для друга.\n"
+            "4. Игрок вставляет этот адрес во вкладке 'Я Игрок' и запускает GTA.\n"
+            "5. В игре открыть меню RageCoop+ через F12 и выбрать Connect/Подключиться."
+        )
+        self.clipboard_clear()
+        self.clipboard_append(text)
+        self.set_player_status("Шаги сети скопированы")
+        self.log("Шаги VPN/tunnel скопированы в буфер обмена.", "player")
+
     def refresh_vpn_address(self) -> None:
         try:
             self.pending_host_root = self.get_host_root()
@@ -1255,6 +1304,8 @@ class RageCoopLauncherApp(ctk.CTk):
         self.launch_game_button.configure(state="disabled")
         self.player_browse_button.configure(state="disabled")
         self.player_paste_button.configure(state="disabled")
+        self.player_vpn_button.configure(state="disabled")
+        self.player_copy_network_button.configure(state="disabled")
         self.set_busy("player", True)
         self.run_threaded(self._player_worker)
 
@@ -1312,6 +1363,8 @@ class RageCoopLauncherApp(ctk.CTk):
             self.after(0, lambda: self.launch_game_button.configure(state="normal"))
             self.after(0, lambda: self.player_browse_button.configure(state="normal"))
             self.after(0, lambda: self.player_paste_button.configure(state="normal"))
+            self.after(0, lambda: self.player_vpn_button.configure(state="normal"))
+            self.after(0, lambda: self.player_copy_network_button.configure(state="normal"))
 
     def on_close(self) -> None:
         if (self.server_process and self.server_process.poll() is None) or (

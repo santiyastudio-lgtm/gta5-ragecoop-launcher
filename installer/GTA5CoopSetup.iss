@@ -11,6 +11,7 @@ AppPublisher={#MyAppPublisher}
 DefaultDirName={localappdata}\Programs\GTA5 RAGECOOP Launcher
 DefaultGroupName=GTA5 RAGECOOP Launcher
 DisableProgramGroupPage=no
+UsePreviousAppDir=yes
 OutputDir=..\dist
 OutputBaseFilename=GTA5CoopSetup
 Compression=lzma2
@@ -40,10 +41,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "..\dist\GTA5CoopLauncher.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\dist\launcher_config.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\dist\launcher_config.json"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist
 Source: "..\dist\README.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "WINDOWS_SETUP_RU.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\assets\github-avatar.png"; DestDir: "{app}\assets"; Flags: ignoreversion
 Source: "..\dist\PLAYER_INSTRUCTIONS_RU.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\dist\RageCoop.Client.zip"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\dist\RageCoop.Server-win-x64.zip"; DestDir: "{app}"; Flags: ignoreversion
@@ -72,6 +72,9 @@ Filename: "{app}\{#MyAppExeName}"; Description: "Запустить GTA5 RAGECOO
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\logs"
 Type: files; Name: "{app}\launcher_config.json.*.bak"
+
+[InstallDelete]
+Type: files; Name: "{app}\assets\github-avatar.png"
 
 [Code]
 var
