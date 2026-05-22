@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+
+build/
+dist/
+logs/
+
+*.log
+*.bak
+*.installer-bak-*
+
+.venv/
+venv/
+
+# Local game/mod payloads are distributed as release assets, not committed.
+*.exe
+*.msi
+*.zip
+
+# Keep generated specs and source assets tracked explicitly.
+!GTA5CoopInstaller.spec
+!GTA5CoopLauncher.spec
+!assets/
+!assets/app_icon.ico
+!assets/github-avatar.png

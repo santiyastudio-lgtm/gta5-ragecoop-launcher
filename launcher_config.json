@@ -1,0 +1,55 @@
+{
+  "tunnel_backend": "vpn_lan",
+  "default_port": 4499,
+  "default_player_address": "",
+  "game_exe_candidates": [
+    "PlayGTAV.exe",
+    "GTA5.exe"
+  ],
+  "server_exe": "server/RageCoop.Server.exe",
+  "client_settings": "scripts/RageCoop/Data/RageCoop.Client.Settings.xml",
+  "client_settings_candidates": [
+    "scripts/Data/RageCoop.Client.Settings.xml",
+    "scripts/RageCoop/Data/RageCoop.Client.Settings.xml"
+  ],
+  "vpn_exe_candidates": [
+    "C:\\Program Files\\WireGuard\\wireguard.exe",
+    "C:\\Program Files\\OpenVPN Connect\\OpenVPNConnect.exe",
+    "C:\\Program Files\\Tailscale\\tailscale-ipn.exe",
+    "C:\\Program Files (x86)\\ZeroTier\\One\\zerotier_desktop_ui.exe",
+    "wireguard.exe",
+    "OpenVPNConnect.exe",
+    "tailscale-ipn.exe",
+    "zerotier_desktop_ui.exe"
+  ],
+  "vpn_adapter_keywords": [
+    "wireguard",
+    "amnezia",
+    "openvpn",
+    "nebula",
+    "wintun",
+    "tap-windows",
+    "tailscale",
+    "zerotier"
+  ],
+  "script_hook_v_zip_candidates": [
+    "ScriptHookV.zip",
+    "ScriptHookV_3788.0_1013.34.zip",
+    "script-hook-v-1-0-3788-0.zip"
+  ],
+  "script_hook_v_dotnet_zip_candidates": [
+    "ScriptHookVDotNetEnhanced-v1.1.0.5.zip",
+    "ScriptHookVDotNetEnhanced.zip",
+    "ScriptHookVDotNet.zip"
+  ],
+  "ragecoop_plus_zip_candidates": [
+    "RageCoopPlus.zip",
+    "RageCoop+.zip",
+    "RageCoopPlus_1.1.zip",
+    "RageCoop+ Multiplayer Client Installer + Server (FIXED) 1.1.zip",
+    "*RageCoop+*.zip",
+    "*RageCoopPlus*.zip"
+  ],
+  "ragecoop_plus_client_dir": "D:\\Games\\RageCoopPlus",
+  "ragecoop_plus_server_dir": "D:\\Games\\RageCoopPlusServer"
+}
