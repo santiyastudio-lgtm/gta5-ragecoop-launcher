@@ -68,9 +68,7 @@ python -m PyInstaller GTA5CoopInstaller.spec --noconfirm --clean
 dist\GTA5CoopSetup.exe
 ```
 
-## Что не входит
-
-Проект не содержит и не должен распространять файлы GTA V. У каждого игрока должна быть своя легальная установленная копия игры.
+У каждого игрока должна быть своя установленная копия игры.
 
 <!-- SANTIYA_SUPPORT_START -->
 ## Support / Поддержать проект
