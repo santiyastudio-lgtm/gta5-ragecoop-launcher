@@ -73,14 +73,10 @@ dist\GTA5CoopSetup.exe
 <!-- SANTIYA_SUPPORT_START -->
 ## Support / Поддержать проект
 
-Cards / Карты:
-
-- T-Bank card (RF only): `2200701933182781`
-- Ozon Bank card (RF only): `2204320688009192`
-
 Wallets / Кошельки:
 
-- Solana: `97j3xnrjHtM5dDUZ8xAkAKqxY1Axro4gvsPCkqgZKQTj`
-- Ethereum: `0x061dE20Bb9b2fA9c1C3d8E38939092aCB76284fe`
-- Bitcoin: `bc1qfyzhnhajm8rslkhell9mg54na2tla90e6dkf3d`
+- Bitcoin (BTC, Bitcoin network): `bc1qhft9dxkn0g07zm9ht8zrfqyrh85djhueu4q49k`
+- Ethereum (ETH, Ethereum network): `0x5311B0318A24F63196A572b447609bc336A4C7b2`
+- Solana (SOL, Solana network): `9i76uPGouNh8KVB8LtippfFY7p6kG2ZSLbtLwPqb6i76`
+- USDT (Tether, Solana/SPL network): `9i76uPGouNh8KVB8LtippfFY7p6kG2ZSLbtLwPqb6i76`
 <!-- SANTIYA_SUPPORT_END -->
