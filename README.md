@@ -73,6 +73,10 @@ dist\GTA5CoopSetup.exe
 <!-- SANTIYA_SUPPORT_START -->
 ## Support / Поддержать проект
 
+If this project has been useful to you, thank you for supporting it. Your help
+gives me time to keep improving it, fixing rough edges, and shipping updates.
+Please take a moment to double-check the network before sending funds.
+
 Wallets / Кошельки:
 
 - Bitcoin (BTC, Bitcoin network): `bc1qhft9dxkn0g07zm9ht8zrfqyrh85djhueu4q49k`
